@@ -1,7 +1,5 @@
 use tcod::colors::*;
 use tcod::console::*;
-use tcod::input::Key;
-use tcod::input::KeyCode::*;
 
  // actual size of the window
  const SCREEN_WIDTH: i32 = 80;
@@ -35,12 +33,6 @@ fn main() {
         tcod.root.put_char(1, 1, '@', BackgroundFlag::None);
         tcod.root.flush();
         tcod.root.wait_for_keypress(true);
-        
-        // handle keys and exit game if needed
-        let exit = handle_keys(&mut tcod, &mut player_x, &mut player_y);
-            if exit {
-                break;
-            }
     }
 }
 
@@ -49,17 +41,6 @@ fn handle_keys(tcod: &mut Tcod, player_x: &mut i32, player_y: &mut i32) -> bool 
 
     let key = tcod.root.wait_for_keypress(true);
     match key {
-        Key {
-            code: Enter,
-            alt: true,
-            ..
-        } => {
-            // Alt+Enter: toggle fullscreen
-            let fullscreen = tcod.root.is_fullscreen();
-            tcod.root.set_fullscreen(!fullscreen);
-        }
-        Key { code: Escape, .. } => return true, // exit game
-
         // movement keys
         Key { code: Up, .. } => *player_y -= 1,
         Key { code: Down, .. } => *player_y += 1,

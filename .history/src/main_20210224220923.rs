@@ -35,7 +35,6 @@ fn main() {
         tcod.root.put_char(1, 1, '@', BackgroundFlag::None);
         tcod.root.flush();
         tcod.root.wait_for_keypress(true);
-        
         // handle keys and exit game if needed
         let exit = handle_keys(&mut tcod, &mut player_x, &mut player_y);
             if exit {
